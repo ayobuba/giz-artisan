@@ -1,0 +1,11 @@
+<html>
+
+    <body>
+        <h3>Dear ${order.artisanBioData.firstName}, Artisan Job Center has received your registration. thank you</h3>
+
+        <div>
+            login please
+        </div>
+        <span>Sent using spring mail</span>
+    </body>
+</html>
