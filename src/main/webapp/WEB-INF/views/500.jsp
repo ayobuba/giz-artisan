@@ -74,7 +74,7 @@
                   500
                </div>
                <div class="details">
-                <h3>Oops! Under Construction</h3>
+                <h3>An Error was Encountered/h3>
                 <p>
                     We are fixing it!<br>
                     Please come back in a while.<br><br>

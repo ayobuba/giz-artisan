@@ -42,10 +42,10 @@ public class InterviewInviteNotification implements MailService {
 			message.setFrom(new InternetAddress("artisanjobcenter@gmail.com"));
 			message.setRecipients(Message.RecipientType.TO,
 					InternetAddress.parse(enrolment.getArtisan().getArtisanBioData().getEmail().getEmailAddress()));
-			message.setSubject("Artisan Job Centre");
+			message.setSubject("Artisan Job Centre Interview");
 			message.setText("Dear, " + enrolment.getArtisan().getArtisanBioData().getFirstName() + " "
 					+ enrolment.getArtisan().getArtisanBioData().getLastName()
-					+ "\n\n ,you have just enrolled with us.Thank you");
+					+ "\n\n ,you have just been invited for an interview.Thank you");
 
 			Transport.send(message);
 

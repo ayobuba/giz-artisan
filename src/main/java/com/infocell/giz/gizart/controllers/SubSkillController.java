@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.infocell.giz.gizart.model.Login;
+import com.infocell.giz.gizart.model.Skill;
 import com.infocell.giz.gizart.model.SubSkill;
 import com.infocell.giz.gizart.service.SkillService;
 import com.infocell.giz.gizart.service.SubSkillService;
@@ -82,6 +83,54 @@ public class SubSkillController {
 
 				rd.addFlashAttribute("skillSubSkillList", subSkillService.getListFromSkill(skillId));
 				return "createSubSkill";
+
+			} else {
+				return "redirect:/admin/login";
+
+			}
+		} catch (NullPointerException e) {
+			return "redirect:/admin/login";
+
+		}
+
+	}
+
+	@RequestMapping(value = "/edit/{skillId}", method = RequestMethod.GET)
+	public String edit(Model model, @PathVariable("skillId") int skillId, RedirectAttributes rd, HttpSession session) {
+
+		Login l = (Login) session.getAttribute("admin");
+		try {
+			if (l != null && l.getRole().getRoleName().equalsIgnoreCase("admin")) {
+
+				Skill s = subSkillService.get(skillId).getSkill();
+
+				rd.addFlashAttribute("skillSubSkillList", subSkillService.getListFromSkill(s.getSkillId()));
+				return "editSubSkill";
+
+			} else {
+				return "redirect:/admin/login";
+
+			}
+		} catch (NullPointerException e) {
+			return "redirect:/admin/login";
+
+		}
+
+	}
+
+	@RequestMapping("/delete/{subSkillId}")
+	public String deleteSubSkill(@PathVariable("subSkillId") int subSkillId, RedirectAttributes rd,
+			HttpSession session) {
+
+		Login l = (Login) session.getAttribute("admin");
+		try {
+			if (l != null && l.getRole().getRoleName().equalsIgnoreCase("admin")) {
+
+				Skill s = subSkillService.get(subSkillId).getSkill();
+
+				subSkillService.delete(subSkillId);
+				rd.addFlashAttribute("message", "Deleted Successfully");
+				return "redirect:/skill/manage";
 
 			} else {
 				return "redirect:/admin/login";

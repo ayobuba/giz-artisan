@@ -54,7 +54,7 @@
                     <form:form method="POST" action="${loginFormUrl}" modelAttribute="adminLog">
                     
                         <h1>Admin Login</h1>
-                        <h5 style="color:red;">${msg}</h5>
+                        <h5 style="color:red;">${msg}${errMsg }</h5>
                         <h5 style="color:green;">${logout}</h5>
                         <div>
                             <form:input path="login.username" type="text" class="form-control" placeholder="Username" required="" name="username" modelAttribute="loginCommand"/>
@@ -68,9 +68,9 @@
                         <div class="clearfix"></div>
                         <div class="separator">
 
-                            <p class="change_link">
+                            <!-- <p class="change_link">
                                 <a href="#toregister" class="to_register"> Lost your password? </a>
-                            </p>
+                            </p> -->
                             <div class="clearfix"></div>
                             <br />
                             <div>

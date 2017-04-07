@@ -50,7 +50,7 @@
 
 
 
-    <!-- INCLUDE HEADER HERE -->
+    <%@ include file="adminHeader.jsp" %>
 
     
 
@@ -121,7 +121,7 @@
                   
 
 
-                   <!--   FOOTER HEERE -->
+                   <%@ include file="adminFooter.jsp" %>
 
 
 
@@ -180,7 +180,7 @@
             ],
                     'iDisplayLength': 12,
                     "sPaginationType": "full_numbers",
-                    "dom": 'T<"clear">lfrtip',
+                    
                     "tableTools": {
                         "sSwfPath": "<?php echo base_url('assets2/js/Datatables/tools/swf/copy_csv_xls_pdf.swf'); ?>"
                     }

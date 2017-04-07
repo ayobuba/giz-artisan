@@ -74,40 +74,44 @@
                             <div class="x_panel">
                                 
                                 <div class="x_content">
+                                <h5 style="color:blue">${msg }</h5>
                                     <table id="example" class="table table-striped responsive-utilities jambo_table">
                                         <thead>
                                             <tr class="headings">
-                                                <th>
-                                                    <input type="checkbox" class="tableflat">
-                                                </th>
+                                                
                                                 <th>S/N </th>
                                                 <th>Service</th>
                                                 <th>Client</th>
                                                 <th>Client Type</th>
+                                                <th>Status</th>
                                                 <th>No of experts</th>
                                                 <th class=" no-link last" colspan="3"><span class="nobr">Action</span>
                                                 </th>
                                             </tr>
                                         </thead>
-
+										<% int sn=0; %>
+										<c:forEach items="${allRequestList }" var="request">
                                         <tbody>
                                             <tr class="even pointer">
-                                                <td class="a-center ">
-                                                    <input type="checkbox" class="tableflat" name="requestCheck">
-                                                </td>
-                                                <td class=" ">121000040</td>
-                                                <td class=" ">May 23, 2014 11:47:56 PM </td>
-                                                <td class=" ">121000210 <i class="success fa fa-long-arrow-up"></i>
-                                                </td>
-                                                <td class=" ">121000040</td>
-                                                <td class=" ">May 23, 2014 11:47:56 PM </td>
                                                 
-                                                <td class=" last"><a href="#" class="">Approved</a></td>
-                                                <td class=" last"><a href="#" class="">Disapproved</a></td>
+                                                <td class=" "><%++sn; %></td>
+                                                <td class=" ">${request.subSkill.name }</td>
+                                                <td class=" ">${request.client.organization.organizationName }
+                                                			${request.client.clientIndividual.bioData.lastName }
+                                                			${request.client.clientIndividual.bioData.firstName }
+                                                </td>
+                                                <td class=" ">${request.client.clientType.clientTypeName}</td>
+                                                <td class=" ">${request.requestStatus.name }</td>
+                                                <td class=" ">${request.numOfExpertRequest }</td>
+                                                
+                                                <td class=" last"><a href="#" class="btn btn-primary">View</a></td>
+                                                
                                             </tr>
                                             
 
                                         </tbody>
+                                        </c:forEach>
+                                        <%sn=0; %>
                                     </table>
                                      
                                 </div>
@@ -182,7 +186,7 @@
             ],
                     'iDisplayLength': 12,
                     "sPaginationType": "full_numbers",
-                    "dom": 'T<"clear">lfrtip',
+                    
                     "tableTools": {
                         "sSwfPath": "<?php echo base_url('assets2/js/Datatables/tools/swf/copy_csv_xls_pdf.swf'); ?>"
                     }

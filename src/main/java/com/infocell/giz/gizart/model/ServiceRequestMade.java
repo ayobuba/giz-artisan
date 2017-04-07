@@ -30,7 +30,7 @@ public class ServiceRequestMade {
 	@Column(name = "num_of_artisan_request")
 	private int numOfExpertRequest;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "request_status_id")
 	private RequestStatus requestStatus;
 

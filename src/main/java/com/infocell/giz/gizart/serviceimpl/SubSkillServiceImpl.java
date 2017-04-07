@@ -42,7 +42,7 @@ public class SubSkillServiceImpl implements SubSkillService {
 	}
 
 	@Override
-	public void delete(String id) {
+	public void delete(int id) {
 		subSkillDao.delete(id);
 	}
 

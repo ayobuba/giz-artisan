@@ -3,6 +3,7 @@ package com.infocell.giz.gizart.daoimpl;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -47,13 +48,17 @@ public class SubSkillDaoImpl extends AbstractDao<Integer, SubSkill> implements S
 
 	@Override
 	public void update(SubSkill s) {
-		update(s);
+		Query q = getSession().createQuery("from SubSkill where id = :id ");
+		q.setParameter("id", s.getId());
+		SubSkill e = (SubSkill) q.list().get(0);
+		e.setName(s.getName());
+		getSession().update(e);
 
 	}
 
 	@Override
-	public void delete(String id) {
-		SubSkill s = getWithSid(id);
+	public void delete(int id) {
+		SubSkill s = get(id);
 		delete(s);
 	}
 

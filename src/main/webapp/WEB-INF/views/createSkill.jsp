@@ -60,7 +60,7 @@
                         <span></span>
                             <h3>Create Artisan Skill</h3>
                             
-                            <span style="color: green"><h2>${message}</h2></span>
+                            <span style="color: green"><h4 style="color:orange">${message}</h4></span>
                         </div>
                         
                     </div>
@@ -144,14 +144,14 @@
                                                 </td>
                                                 <td class=" "><%=++sn %></td>
                                                 <td class=" ">${skill.name}</td>
-                                                </td>
+                                                
                                             
                                                 
-                                                <td ><a href="<spring:url value=""/>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+                                                <td ><a href="<spring:url value="/skill/edit/${skill.skillId}"/>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
                                                 </td>
-                                                <td ><a href="<spring:url value="/skill/addsubskill/${skill.skillId }"/>" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> Add subskill </a>
+                                                <td ><a href="<spring:url value="/skill/addsubskill/${skill.skillId }"/>" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> Manage subskill </a>
                                                 </td>
-                                                <td><a href="<spring:url value="/skill/remove/${skill.skillId}"/>" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>Delete</a></td>
+                                                <td><a href="<spring:url value="/skill/remove/${skill.skillId}"/>" class="btn btn-danger btn-xs">Delete</a></td>
                                             </tr>
                                             </c:forEach>
                                             <% sn=0; %>
@@ -446,7 +446,7 @@
             ],
                     'iDisplayLength': 12,
                     "sPaginationType": "full_numbers",
-                    "dom": 'T<"clear">lfrtip',
+                   
                     "tableTools": {
                         "sSwfPath": "<?php echo base_url('assets2/js/Datatables/tools/swf/copy_csv_xls_pdf.swf'); ?>"
                     }

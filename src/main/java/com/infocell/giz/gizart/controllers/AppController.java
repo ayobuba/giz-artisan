@@ -85,7 +85,7 @@ public class AppController {
 	public String contactUsPage(@ModelAttribute("contactUs") ContactUs contactUs, RedirectAttributes rd) {
 
 		contactUsService.create(contactUs);
-		contactUsNotification.sendToAllAdmins(adminService.getList());
+		contactUsNotification.sendToAllAdmins(adminService.getList(), contactUs);
 
 		rd.addFlashAttribute("msg", "Thank you. We will get back to you ASAP!");
 		return "redirect:/contact";

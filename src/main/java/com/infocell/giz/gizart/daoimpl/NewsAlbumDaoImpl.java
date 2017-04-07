@@ -36,7 +36,7 @@ public class NewsAlbumDaoImpl extends AbstractDao<Integer, NewsAlbum> implements
 	@Override
 	public NewsAlbum getWithSid(String sid) {
 		Criteria criteria = createEntityCriteria();
-		criteria.add(Restrictions.eq("sid", sid));
+		criteria.add(Restrictions.eq("albumTitle", sid));
 		return (NewsAlbum) criteria.uniqueResult();
 	}
 

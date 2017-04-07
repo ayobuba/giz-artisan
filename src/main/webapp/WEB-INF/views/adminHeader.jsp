@@ -100,8 +100,7 @@
                                         <li><a href="<spring:url value="/service/approved-request"/>">Approved Request</a>
                                         </li>
 
-                                        <li><a href="<spring:url value="/service/disapproved-request"/>">Disapproved Request</a>
-                                        </li>
+                                        
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-users"></i> Manage Experts <span class="fa fa-chevron-down"></span></a>
@@ -120,13 +119,7 @@
                                         
                                     </ul>
                                 </li>
-                                <li><a><i class="fa fa-users"></i> Manage Request <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu" style="display: none">
-                                        <li><a href="allClients.html">Manage Request</a>
-                                        </li>
-                                        
-                                    </ul>
-                                </li>
+                               
                                 <li><a><i class="fa fa-users"></i> Manage Absorption <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu" style="display: none">
                                         <li><a href="<spring:url value="/enrol/manage/enrolments"/>">Manage Enrolments</a>
@@ -138,16 +131,16 @@
                                 </li>
                                 <li><a><i class="fa fa-users"></i> Manage News <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu" style="display: none">
-                                        <li><a href="allClients.html">Manage News</a>
+                                        <li><a href="<spring:url value="/newsupdate/post"/>">Manage News</a>
                                         </li>
                                         
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-users"></i> Manage Images <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu" style="display: none">
-                                        <li><a href="allClients.html">Manage News Images </a></li>
-                                        <li><a href="allClients.html">Manage Gallery Images</a></li>
-                                        <li><a href="allClients.html">Manage Experts Images</a></li>
+                                        <li><a href="<spring:url value="/gallery/news"/>">Manage News Images </a></li>
+                                        <li><a href="<spring:url value="/gallery/gallery"/>">Manage Gallery Images</a></li>
+                                        <li><a href="<spring:url value="/gallery/experts"/>">Manage Experts Images</a></li>
                                         
                                         
                                     </ul>

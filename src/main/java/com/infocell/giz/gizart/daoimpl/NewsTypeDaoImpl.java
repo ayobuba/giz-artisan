@@ -30,7 +30,7 @@ public class NewsTypeDaoImpl extends AbstractDao<Integer, NewsType> implements N
 	@Override
 	public NewsType getWithSid(String sid) {
 		Criteria criteria = createEntityCriteria();
-		criteria.add(Restrictions.eq("sid", sid));
+		criteria.add(Restrictions.eq("newsType", sid));
 		return (NewsType) criteria.uniqueResult();
 	}
 

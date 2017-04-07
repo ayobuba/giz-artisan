@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.infocell.giz.gizart.dao.ExpertDao;
+import com.infocell.giz.gizart.model.AvailabilityStatus;
 import com.infocell.giz.gizart.model.Expert;
 import com.infocell.giz.gizart.model.SubSkill;
 import com.infocell.giz.gizart.service.ExpertService;
@@ -41,8 +42,7 @@ public class ExpertServiceImpl implements ExpertService {
 
 	@Override
 	public void update(Expert s) {
-		// TODO Auto-generated method stub
-
+		clientDao.update(s);
 	}
 
 	@Override
@@ -54,6 +54,12 @@ public class ExpertServiceImpl implements ExpertService {
 	public List<Expert> getWithSkill(SubSkill s) {
 		// TODO Auto-generated method stub
 		return clientDao.getWithSkill(s);
+	}
+
+	@Override
+	public List<Expert> getWithSkillAndAvailable(SubSkill s, AvailabilityStatus a) {
+		// TODO Auto-generated method stub
+		return clientDao.getWithSkillAndAvailable(s, a);
 	}
 
 }

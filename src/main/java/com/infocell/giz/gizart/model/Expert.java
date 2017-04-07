@@ -1,7 +1,6 @@
 package com.infocell.giz.gizart.model;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -12,10 +11,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.Type;
+import org.joda.time.LocalDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "expert")
@@ -26,8 +28,10 @@ public class Expert {
 	@Column(name = "expert_id")
 	private int expertId;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date date;
+	@DateTimeFormat(pattern = "yyyy-mmm-dd")
+	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
+	@Column(name = "date")
+	private LocalDate date;
 
 	@Column(name = "image")
 	private String image;
@@ -35,6 +39,10 @@ public class Expert {
 	@OneToOne
 	@JoinColumn(name = "interview_id")
 	private Interview interview;
+
+	@ManyToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "availability_id")
+	private AvailabilityStatus availabilityStatus;
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "experts_requested", joinColumns = @JoinColumn(name = "expert_id"), inverseJoinColumns = @JoinColumn(name = "request_made_id"))
@@ -46,14 +54,6 @@ public class Expert {
 
 	public void setExpertId(int expertId) {
 		this.expertId = expertId;
-	}
-
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
 	}
 
 	public Interview getInterview() {
@@ -78,6 +78,22 @@ public class Expert {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public AvailabilityStatus getAvailabilityStatus() {
+		return availabilityStatus;
+	}
+
+	public void setAvailabilityStatus(AvailabilityStatus availabilityStatus) {
+		this.availabilityStatus = availabilityStatus;
+	}
+
+	public LocalDate getDate() {
+		return date;
+	}
+
+	public void setDate(LocalDate date) {
+		this.date = date;
 	}
 
 }

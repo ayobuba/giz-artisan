@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.infocell.giz.gizart.dao.ServiceRequestMadeDao;
+import com.infocell.giz.gizart.model.ClientIndividual;
+import com.infocell.giz.gizart.model.RequestStatus;
 import com.infocell.giz.gizart.model.ServiceRequestMade;
+import com.infocell.giz.gizart.model.SubSkill;
 import com.infocell.giz.gizart.service.ServiceRequestMadeService;
 
 @Service
@@ -40,8 +43,7 @@ public class ServiceRequestMadeServiceImpl implements ServiceRequestMadeService 
 
 	@Override
 	public void update(ServiceRequestMade s) {
-		// TODO Auto-generated method stub
-
+		clientDao.update(s);
 	}
 
 	@Override
@@ -65,6 +67,19 @@ public class ServiceRequestMadeServiceImpl implements ServiceRequestMadeService 
 	public List<ServiceRequestMade> getDisapprovedList() {
 		// TODO Auto-generated method stub
 		return clientDao.getDisapprovedList();
+	}
+
+	@Override
+	public List<ServiceRequestMade> getListByServiceAndApproved(SubSkill s, RequestStatus r) {
+		// TODO Auto-generated method stub
+		return clientDao.getListByServiceAndApproved(s, r);
+
+	}
+
+	@Override
+	public List<ServiceRequestMade> getListByClientIndividual(ClientIndividual s) {
+		// TODO Auto-generated method stub
+		return clientDao.getListByClientIndividual(s);
 	}
 
 }

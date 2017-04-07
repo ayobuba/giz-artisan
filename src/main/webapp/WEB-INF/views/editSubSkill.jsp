@@ -52,7 +52,7 @@
 
 
 
-			<%@ include file="header.jsp" %>
+			<%@ include file="adminHeader.jsp" %>
 
 
 
@@ -78,13 +78,14 @@
                                 </div>
                                 <div class="x_content">
                                     <br />
-                                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="POST" action="editSkill.html">
-
+                                    <spring:url value="/skill/edit-subskill" var="editSubSkillUrl"/>
+                                    <form:form id="demo-form2" modelAttribute="subSkill" class="form-horizontal form-label-left" method="POST" action="${editSubSkillUrl}">
+										<form:hidden path="id"/>
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="skill-name">Sub Skill Name <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="text" id="skillName" required="required" class="form-control col-md-7 col-xs-12" name="skillName">
+                                                <form:input type="text" id="skillName" required="required" class="form-control col-md-7 col-xs-12" path="name"/>
                                             </div>
                                              <span> <button type="submit" class="btn btn-success">Update Subskill</button></span>
                                         </div>
@@ -94,7 +95,7 @@
                                         <div class="ln_solid"></div>
                                         
 
-                                    </form>
+                                    </form:form>
                                 </div>
                             </div>
                         </div>
@@ -109,7 +110,7 @@
 
                
 
-			<%@ include file="footer.jsp" %>
+			<%@ include file="adminFooter.jsp" %>
 
 
                
@@ -358,7 +359,7 @@
             ],
                     'iDisplayLength': 12,
                     "sPaginationType": "full_numbers",
-                    "dom": 'T<"clear">lfrtip',
+                    
                     "tableTools": {
                         "sSwfPath": "<?php echo base_url('assets2/js/Datatables/tools/swf/copy_csv_xls_pdf.swf'); ?>"
                     }

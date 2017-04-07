@@ -27,23 +27,42 @@
     <link href="<spring:url value="/resources/admin/assets/css/icheck/flat/green.css"/>" rel="stylesheet">
 
 
+
+
+
+    <!-- Global styles START -->          
+  <link href="<spring:url value="/resources/admin/assets/plugins/font-awesome/css/font-awesome.min.css"/>" rel="stylesheet">
+  <link href="<spring:url value="/resources/admin/assets/plugins/bootstrap/css/bootstrap.min.css"/>" rel="stylesheet">
+  <!-- Global styles END --> 
+   
+  <!-- Page level plugin styles START -->
+  <link href="<spring:url value="/resources/admin/assets/plugins/fancybox/source/jquery.fancybox.css"/>" rel="stylesheet">
+  <!-- Page level plugin styles END -->
+
+  <!-- Theme styles START -->
+  <link href="<spring:url value="/resources/admin/assets/pages/css/components.css"/>" rel="stylesheet">
+  <link href="<spring:url value="/resources/admin/assets/corporate/css/style.css"/>" rel="stylesheet">
+  <link href="<spring:url value="/resources/admin/assets/pages/css/gallery.css"/>" rel="stylesheet">
+  <link href="<spring:url value="/resources/admin/assets/corporate/css/style-responsive.css"/>" rel="stylesheet">
+  <link href="<spring:url value="/resources/admin/assets/corporate/css/themes/red.css"/>" rel="stylesheet" id="style-color">
+  <link href="<spring:url value="/resources/admin/assets/corporate/css/custom.css"/>" rel="stylesheet">
+  <!-- Theme styles END -->
+
+
     <script src="<spring:url value="/resources/admin/assets/js/jquery.min.js"/>"></script>
 
-    <!--[if lt IE 9]>
-        <script src="../assets/js/ie8-responsive-file-warning.js"></script>
-        <![endif]-->
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
+    
 
 
 
 
 
-            <!-- INCLUDE HEADER HERE -->
+        <!-- HEADER HERE -->
+
+
+
+
+
 
 
             <!-- page content -->
@@ -52,7 +71,7 @@
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3> Artisan Media Gallery <small> gallery</small> </h3>
+                            <h3> Artisan Media Gallery </h3>
                         </div>
 
                         
@@ -62,202 +81,54 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="x_panel">
-                                <div class="x_title">
-                                    <h2>Media Gallery <small> gallery design </small></h2>
-                                    
-                                    <div class="clearfix"></div>
-                                </div>
+                                
                                 <div class="x_content">
 
                                     <div class="row">
 
-                                        <div class="col-md-55">
-                                            <div class="thumbnail">
-                                                <div class="image view view-first">
-                                                    <img style="width: 100%; display: block;" src="images/4.jpg" alt="image" />
-                                                    <div class="mask">
-                                                        <p>Your Text</p>
-                                                        <div class="tools tools-bottom">
-                                                            <a href="#"><i class="fa fa-link"></i></a>
-                                                            <a href="#"><i class="fa fa-pencil"></i></a>
-                                                            <a href="#"><i class="fa fa-times"></i></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="caption">
-                                                    <p>Snow and Ice Incoming for the South</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-55">
-                                            <div class="thumbnail">
-                                                <div class="image view view-first">
-                                                    <img style="width: 100%; display: block;" src="images/4.jpg" alt="image" />
-                                                    <div class="mask">
-                                                        <p>Your Text</p>
-                                                        <div class="tools tools-bottom">
-                                                            <a href="#"><i class="fa fa-link"></i></a>
-                                                            <a href="#"><i class="fa fa-pencil"></i></a>
-                                                            <a href="#"><i class="fa fa-times"></i></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="caption">
-                                                    <p>Snow and Ice Incoming for the South</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-55">
-                                            <div class="thumbnail">
-                                                <div class="image view view-first">
-                                                    <img style="width: 100%; display: block;" src="images/4.jpg" alt="image" />
-                                                    <div class="mask">
-                                                        <p>Your Text</p>
-                                                        <div class="tools tools-bottom">
-                                                            <a href="#"><i class="fa fa-link"></i></a>
-                                                            <a href="#"><i class="fa fa-pencil"></i></a>
-                                                            <a href="#"><i class="fa fa-times"></i></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="caption">
-                                                    <p>Snow and Ice Incoming for the South</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-55">
-                                            <div class="thumbnail">
-                                                <div class="image view view-first">
-                                                    <img style="width: 100%; display: block;" src="images/4.jpg" alt="image" />
-                                                    <div class="mask">
-                                                        <p>Your Text</p>
-                                                        <div class="tools tools-bottom">
-                                                            <a href="#"><i class="fa fa-link"></i></a>
-                                                            <a href="#"><i class="fa fa-pencil"></i></a>
-                                                            <a href="#"><i class="fa fa-times"></i></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="caption">
-                                                    <p>Snow and Ice Incoming for the South</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-55">
-                                            <div class="thumbnail">
-                                                <div class="image view view-first">
-                                                    <img style="width: 100%; display: block;" src="images/4.jpg" alt="image" />
-                                                    <div class="mask">
-                                                        <p>Your Text</p>
-                                                        <div class="tools tools-bottom">
-                                                            <a href="#"><i class="fa fa-link"></i></a>
-                                                            <a href="#"><i class="fa fa-pencil"></i></a>
-                                                            <a href="#"><i class="fa fa-times"></i></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="caption">
-                                                    <p>Snow and Ice Incoming for the South</p>
-                                                </div>
-                                            </div>
-                                        </div>
+
+
+                                    <!-- LOOP START HERE -->
+
+
+
+
 
 
                                         <div class="col-md-55">
                                             <div class="thumbnail">
                                                 <div class="image view view-first">
-                                                    <img style="width: 100%; display: block;" src="images/4.jpg" alt="image" />
+                                                    <a data-rel="fancybox-button" title="" href="images/4 .jpg" class="fancybox-button">
+                                                    <img alt="" src="images/4.jpg" class="img-responsive" style="width: 100%; display: block;">
+                                                     <div class="zoomix"><i class="fa fa-search"></i></div>
+                                               
                                                     <div class="mask no-caption">
-                                                        <div class="tools tools-bottom">
-                                                            <a href="#"><i class="fa fa-link"></i></a>
-                                                            <a href="#"><i class="fa fa-pencil"></i></a>
-                                                            <a href="#"><i class="fa fa-times"></i></a>
+                                                        <div class="tools tools-bottom zoomix">
+                                                        <i class="fa fa-search"></i>
+                                                           
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="caption">
-                                                    <p><strong>Image Name</strong>
-                                                    </p>
-                                                    <p>Snow and Ice Incoming</p>
+                                                <div class="caption" align="center">
+                                                    <p><strong>{{Full Name of Artisan}}</strong></p>
+                                                    <p>{{Skill}}</p>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-55">
-                                            <div class="thumbnail">
-                                                <div class="image view view-first">
-                                                    <img style="width: 100%; display: block;" src="images/4.jpg" alt="image" />
-                                                    <div class="mask no-caption">
-                                                        <div class="tools tools-bottom">
-                                                            <a href="#"><i class="fa fa-link"></i></a>
-                                                            <a href="#"><i class="fa fa-pencil"></i></a>
-                                                            <a href="#"><i class="fa fa-times"></i></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="caption">
-                                                    <p><strong>Image Name</strong>
-                                                    </p>
-                                                    <p>Snow and Ice Incoming</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-55">
-                                            <div class="thumbnail">
-                                                <div class="image view view-first">
-                                                    <img style="width: 100%; display: block;" src="images/4.jpg" alt="image" />
-                                                    <div class="mask no-caption">
-                                                        <div class="tools tools-bottom">
-                                                            <a href="#"><i class="fa fa-link"></i></a>
-                                                            <a href="#"><i class="fa fa-pencil"></i></a>
-                                                            <a href="#"><i class="fa fa-times"></i></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="caption">
-                                                    <p><strong>Image Name</strong>
-                                                    </p>
-                                                    <p>Snow and Ice Incoming</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-55">
-                                            <div class="thumbnail">
-                                                <div class="image view view-first">
-                                                    <img style="width: 100%; display: block;" src="images/4.jpg" alt="image" />
-                                                    <div class="mask no-caption">
-                                                        <div class="tools tools-bottom">
-                                                            <a href="#"><i class="fa fa-link"></i></a>
-                                                            <a href="#"><i class="fa fa-pencil"></i></a>
-                                                            <a href="#"><i class="fa fa-times"></i></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="caption">
-                                                    <p><strong>Image Name</strong>
-                                                    </p>
-                                                    <p>Snow and Ice Incoming</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-55">
-                                            <div class="thumbnail">
-                                                <div class="image view view-first">
-                                                    <img style="width: 100%; display: block;" src="images/4.jpg" alt="image" />
-                                                    <div class="mask no-caption">
-                                                        <div class="tools tools-bottom">
-                                                            <a href="#"><i class="fa fa-link"></i></a>
-                                                            <a href="#"><i class="fa fa-pencil"></i></a>
-                                                            <a href="#"><i class="fa fa-times"></i></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="caption">
-                                                    <p><strong>Image Name</strong>
-                                                    </p>
-                                                    <p>Snow and Ice Incoming</p>
-                                                </div>
-                                            </div>
-                                        </div>
+
+
+
+
+                                        <!-- LOOP ENDS HERE -->
+
+
+
+
+
+                                         
+
+
+                                        
 
                                     </div>
 
@@ -267,10 +138,14 @@
                     </div>
                 </div>
 
-                
 
 
-                <!-- INCLUDE FOOTER HERE -->
+
+
+                <!-- FOOTER HERE ->
+
+
+
 
 
 
@@ -299,6 +174,26 @@
     <script src="<spring:url value="/resources/admin/assets/js/icheck/icheck.min.js"/>"></script>
 
     <script src="<spring:url value="/resources/admin/assets/js/custom.js"/>"></script>
+
+
+
+     <script src="<spring:url value="/resources/admin/assets/plugins/jquery.min.js"/>" type="text/javascript"></script>
+    <script src="<spring:url value="/resources/admin/assets/plugins/jquery-migrate.min.js"/>" type="text/javascript"></script>
+    <script src="<spring:url value="/resources/admin/assets/plugins/bootstrap/js/bootstrap.min.js"/>" type="text/javascript"></script>      
+    <script src="<spring:url value="/resources/admin/assets/corporate/scripts/back-to-top.js"/>" type="text/javascript"></script>
+    <!-- END CORE PLUGINS -->
+
+    <!-- BEGIN PAGE LEVEL JAVASCRIPTS (REQUIRED ONLY FOR CURRENT PAGE) -->
+    <script src="<spring:url value="/resources/admin/assets/plugins/fancybox/source/jquery.fancybox.pack.js"/>" type="text/javascript"></script><!-- pop up -->
+
+    <script src="<spring:url value="/resources/admin/assets/corporate/scripts/layout.js"/>" type="text/javascript"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            Layout.init();    
+            Layout.initTwitter();
+        });
+    </script>
+    <!-- END PAGE LEVEL JAVASCRIPTS -->
 
 </body>
 

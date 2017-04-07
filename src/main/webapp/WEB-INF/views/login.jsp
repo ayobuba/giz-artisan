@@ -119,7 +119,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                 <form:input path="client.login.username" type="text" placeholder="Username" class="form-control" name="userName" required="required"/>
                 <form:input path="client.login.password" type="password" placeholder="Password" class="form-control" name="password" required="required"/>
                 <button class="btn text-muted text-center btn-primary" type="submit">Login</button>
-                 Don't have Account? <a class="" href="artisanRegistration.html">Register</a>
+                 
             </form:form>
         </div>
 
@@ -132,7 +132,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                 <p class="text-muted text-center btn-block btn btn-primary btn-rect">Enter your email address</p>
                 <input type="email"  required="required" placeholder="Your E-mail"  class="form-control" />
                 <br />
-                <button class="btn text-muted text-center btn-primary" type="submit">Recover Password</button>
+                <!-- <button class="btn text-muted text-center btn-primary" type="submit">Recover Password</button> -->
             </form>
         </div>
 

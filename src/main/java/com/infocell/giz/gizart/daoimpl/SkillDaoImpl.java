@@ -42,11 +42,11 @@ public class SkillDaoImpl extends AbstractDao<Integer, Skill> implements SkillDa
 
 	@Override
 	public void update(Skill s) {
-		System.out.println("in skill dao");
-		Query query = getSession().createQuery("update Skill set name = :name" + " where skill_id = :skill_id");
-		query.setParameter("name", s.getName());
-		query.setParameter("skill_id", s.getSkillId());
-		int result = query.executeUpdate();
+		Query q = getSession().createQuery("from Skill where skillId = :skillId ");
+		q.setParameter("skillId", s.getSkillId());
+		Skill e = (Skill) q.list().get(0);
+		e.setName(s.getName());
+		getSession().update(e);
 	}
 
 	@Override

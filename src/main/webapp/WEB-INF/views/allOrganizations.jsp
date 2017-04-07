@@ -72,23 +72,22 @@
                                             <tr class="headings">
                                                 
                                                 <th>S/N </th>
-                                                <th>First Name </th>
-                                                <th>Last Name</th>
+                                                <th>Name </th> 
                                                 <th>Location</th>
                                                 <th class=" no-link last"><span class="nobr">Action</span>
                                                 </th>
                                             </tr>
                                         </thead>
                                         <%int sn=0; %>
-									<c:forEach items="${clientIndividualList}" var="client">
+									<c:forEach items="${organizationList}" var="client">
                                         <tbody>
                                             <tr class="even pointer">
                                                 
                                                 <td class=" "><%=++sn %></td>
-                                                <td class=" ">${client.bioData.firstName } </td>
-                                                <td class=" ">${client.bioData.lastName} <i class="success fa fa-long-arrow-up"></i>
+                                                <td class=" ">${client.organizationName } </td>
+                                                <td class=" ">${client.address.description}
                                                 </td>
-                                                <td class=" ">${client.bioData.address.lga.name}</td>
+                                                
                                                 
                                                 <td class=" last"><a class="btn btn-primary btn-xs" href="clientProfile.html"><i class="fa fa-folder"></i> View </a>
                                                 </td>
@@ -168,7 +167,7 @@
             ],
                     'iDisplayLength': 12,
                     "sPaginationType": "full_numbers",
-                    "dom": 'T<"clear">lfrtip',
+                    
                     "tableTools": {
                         "sSwfPath": "<?php echo base_url('assets2/js/Datatables/tools/swf/copy_csv_xls_pdf.swf'); ?>"
                     }

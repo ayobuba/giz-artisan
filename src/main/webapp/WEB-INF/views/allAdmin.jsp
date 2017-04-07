@@ -91,7 +91,7 @@
                                                 <td class=" ">${admin.bioData.email.emailAddress}</td>
                                                 
                                                 </td>
-                                                 <td class=" last"><a href="<spring:url value="/admin/delete/${admin.adminId}"/>" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>Delete</a>
+                                                 <td class=" last"><a href="<spring:url value="/admin/delete/${admin.adminId}"/>" class="btn btn-danger btn-xs" onclick="return confirm("Are you sure you want to delete?")"><i class="fa fa-trash-o"></i>Delete</a>
                                                 </td>
                                                  <td class=" last"><a href="<spring:url value="/admin/edit/${admin.adminId}"/>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
                                                 </td>
@@ -172,7 +172,7 @@
             ],
                     'iDisplayLength': 12,
                     "sPaginationType": "full_numbers",
-                    "dom": 'T<"clear">lfrtip',
+                    
                     "tableTools": {
                         "sSwfPath": "<?php echo base_url('assets2/js/Datatables/tools/swf/copy_csv_xls_pdf.swf'); ?>"
                     }

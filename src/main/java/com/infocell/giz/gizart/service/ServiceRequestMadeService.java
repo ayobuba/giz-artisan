@@ -2,7 +2,10 @@ package com.infocell.giz.gizart.service;
 
 import java.util.List;
 
+import com.infocell.giz.gizart.model.ClientIndividual;
+import com.infocell.giz.gizart.model.RequestStatus;
 import com.infocell.giz.gizart.model.ServiceRequestMade;
+import com.infocell.giz.gizart.model.SubSkill;
 
 public interface ServiceRequestMadeService {
 
@@ -19,6 +22,10 @@ public interface ServiceRequestMadeService {
 	List<ServiceRequestMade> getApprovedList();
 
 	List<ServiceRequestMade> getDisapprovedList();
+
+	List<ServiceRequestMade> getListByClientIndividual(ClientIndividual s);
+
+	List<ServiceRequestMade> getListByServiceAndApproved(SubSkill s, RequestStatus r);
 
 	void update(ServiceRequestMade s);
 

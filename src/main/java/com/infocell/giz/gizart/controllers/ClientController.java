@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -33,6 +34,7 @@ import com.infocell.giz.gizart.service.LoginService;
 import com.infocell.giz.gizart.service.MaritalStatusService;
 import com.infocell.giz.gizart.service.OrganizationService;
 import com.infocell.giz.gizart.service.RoleService;
+import com.infocell.giz.gizart.service.ServiceRequestMadeService;
 import com.infocell.giz.gizart.service.StateService;
 
 @Controller
@@ -71,6 +73,9 @@ public class ClientController {
 
 	@Autowired
 	private RoleService roleService;
+
+	@Autowired
+	private ServiceRequestMadeService serviceRequestMadeService;
 
 	private NewEnrolmentMail newEnrolmentMail = new NewEnrolmentMail();
 	private AdminEnrolmentNotification adminEnrolmentNotification = new AdminEnrolmentNotification();
@@ -120,14 +125,45 @@ public class ClientController {
 	}
 
 	@RequestMapping(value = "/manage/individuals", method = RequestMethod.GET)
-	public String manageIndividuals(Model model) {
-		return "allIndividuals";
+	public String manageIndividuals(Model model, HttpSession session) {
+
+		Login l = (Login) session.getAttribute("admin");
+		try {
+			if (l != null && l.getRole().getRoleName().equalsIgnoreCase("admin")) {
+
+				model.addAttribute("individual", clientIndividualService.getList());
+
+				return "allIndividuals";
+
+			} else {
+				return "redirect:/admin/login";
+
+			}
+		} catch (NullPointerException e) {
+			return "redirect:/admin/login";
+
+		}
 
 	}
 
 	@RequestMapping(value = "/manage/organizations", method = RequestMethod.GET)
-	public String manageOrganizations(Model model) {
-		return "allOrganizations";
+	public String manageOrganizations(Model model, HttpSession session) {
+		Login l = (Login) session.getAttribute("admin");
+		try {
+			if (l != null && l.getRole().getRoleName().equalsIgnoreCase("admin")) {
+
+				model.addAttribute("individual", clientIndividualService.getList());
+
+				return "allOrganizations";
+
+			} else {
+				return "redirect:/admin/login";
+
+			}
+		} catch (NullPointerException e) {
+			return "redirect:/admin/login";
+
+		}
 
 	}
 
@@ -161,6 +197,49 @@ public class ClientController {
 
 		}
 
+	}
+
+	@RequestMapping(value = "/individual/view/{clientId}")
+	public String clientIndividualView(HttpSession session, Model model, @PathVariable("clientId") int clientId) {
+		Login l = (Login) session.getAttribute("admin");
+		try {
+			if (l != null && l.getRole().getRoleName().equalsIgnoreCase("admin")) {
+
+				ClientIndividual c = clientIndividualService.get(clientId);
+
+				model.addAttribute("individual", c);
+				model.addAttribute("requestList", serviceRequestMadeService.getListByClientIndividual(c));
+
+				return "ViewClientIndividual";
+
+			} else {
+				return "redirect:/admin/login";
+
+			}
+		} catch (NullPointerException e) {
+			return "redirect:/admin/login";
+
+		}
+	}
+
+	@RequestMapping(value = "/organization/view/{clientId}")
+	public String clientOrganizationView(HttpSession session, Model model, @PathVariable("clientId") int clientId) {
+		Login l = (Login) session.getAttribute("admin");
+		try {
+			if (l != null && l.getRole().getRoleName().equalsIgnoreCase("admin")) {
+
+				model.addAttribute("organization", organizationService.get(clientId));
+
+				return "ViewClientOrganization";
+
+			} else {
+				return "redirect:/admin/login";
+
+			}
+		} catch (NullPointerException e) {
+			return "redirect:/admin/login";
+
+		}
 	}
 
 	@RequestMapping(value = "/individual/login", method = RequestMethod.POST)
@@ -235,6 +314,11 @@ public class ClientController {
 	public List<ClientIndividual> getClientIndividual() {
 		return clientIndividualService.getList();
 
+	}
+
+	@ModelAttribute("organizationList")
+	public List<Organization> getOrganizations() {
+		return organizationService.getList();
 	}
 
 }

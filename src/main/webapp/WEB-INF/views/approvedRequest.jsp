@@ -74,6 +74,7 @@
                             <div class="x_panel">
                                 
                                 <div class="x_content">
+                                <h5 style="color:blue">${msg}</h5>
                                     <table id="example" class="table table-striped responsive-utilities jambo_table">
                                         <thead>
                                             <tr class="headings">
@@ -89,25 +90,30 @@
                                                 </th>
                                             </tr>
                                         </thead>
-
+										
+										<c:forEach items="${approvedRequestList }" var="approved">
                                         <tbody>
                                             <tr class="even pointer">
                                                 <td class="a-center ">
                                                     <input type="checkbox" class="tableflat" name="requestCheck">
                                                 </td>
-                                                <td class=" ">121000040</td>
-                                                <td class=" ">May 23, 2014 11:47:56 PM </td>
-                                                <td class=" ">121000210 <i class="success fa fa-long-arrow-up"></i>
+                                                <td class=" "></td>
+                                                <td class=" ">${approved.subSkill.name }</td>
+                                                <td class=" ">${approved.client.organization.organizationName}
+                                                	${approved.client.clientIndividual.bioData.lastName}
+                                                	${approved.client.clientIndividual.bioData.firstName}
                                                 </td>
-                                                <td class=" ">121000040</td>
-                                                <td class=" ">May 23, 2014 11:47:56 PM </td>
+                                                <td class=" ">${approved.client.clientType.clientTypeName}</td>
+                                                <td class=" ">${approved.numOfExpertRequest}</td>
                                                 
-                                                <td class=" last"><a href="#" class="">Approved</a></td>
-                                                <td class=" last"><a href="#" class="">Disapproved</a></td>
+                                                <td class=" last"><a href="<spring:url value="/service/assign-request/${approved.requestMadeId}"/>" class="btn btn-success btn-xs">Assign Experts</a></td>
+                                                <td class=" last"><a href="<spring:url value="/service/disapproval/${approved.requestMadeId}"/>" class="btn btn-danger btn-xs">Disapproved</a></td>
+                                               
                                             </tr>
                                             
 
                                         </tbody>
+                                        </c:forEach>
                                     </table>
                                      
                                 </div>
@@ -182,7 +188,7 @@
             ],
                     'iDisplayLength': 12,
                     "sPaginationType": "full_numbers",
-                    "dom": 'T<"clear">lfrtip',
+                    
                     "tableTools": {
                         "sSwfPath": "<?php echo base_url('assets2/js/Datatables/tools/swf/copy_csv_xls_pdf.swf'); ?>"
                     }

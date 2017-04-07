@@ -3,6 +3,7 @@ package com.infocell.giz.gizart.daoimpl;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -22,8 +23,13 @@ public class EnrolmentDaoImpl extends AbstractDao<Integer, Enrolment> implements
 
 	@Override
 	public void update(Enrolment s) {
-		Enrolment e = get(s.getEnrolmentId());
+		Query q = getSession().createQuery("from Enrolment where enrolmentId = :enrolmentId ");
+		q.setParameter("enrolmentId", s.getEnrolmentId());
+		Enrolment e = (Enrolment) q.list().get(0);
 		e.setEnrolmentStatus(s.getEnrolmentStatus());
+		e.setMaritalStatus(s.getMaritalStatus());
+		e.setNok(s.getNok());
+		getSession().update(e);
 
 	}
 

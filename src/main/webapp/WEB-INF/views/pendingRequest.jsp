@@ -72,7 +72,7 @@
 
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="x_panel">
-                                
+                                <h4><span style="color:blue">${msgOrg} ${msgInd} ${msg}</span></h5>
                                 <div class="x_content">
                                     <table id="example" class="table table-striped responsive-utilities jambo_table">
                                         <thead>
@@ -104,8 +104,8 @@
                                                 <td class=" ">${pendingRequest.numOfExpertRequest}</td>
                                                 <td class=" ">${pendingRequest.subSkill.name}</td>
                                                 
-                                                <td class=" last"><a href="#" class="btn btn-info btn-xs">View Request<i class="fa fa-eye"></i></a></td>
-                                                <td class=" last"><a href="#" class="btn btn-success btn-xs">Approve<i class="fa fa-pencil"></i></a></td>
+                                                <td class=" last"><a href="#" class="btn btn-primary btn-xs">View Request<i class="fa fa-eye"></i></a></td>
+                                                <td class=" last"><a href="<spring:url value="/service/approval/${pendingRequest.requestMadeId }"/>" class="btn btn-success btn-xs">Approve<i class="fa fa-pencil"></i></a></td>
                                                 <td class=" last"><a href="#" class="btn btn-danger btn-xs">Disapprove<i class="fa fa-trash-o"></i></a></td>
                                             </tr>
                                             
@@ -187,7 +187,7 @@
             ],
                     'iDisplayLength': 12,
                     "sPaginationType": "full_numbers",
-                    "dom": 'T<"clear">lfrtip',
+                   
                     "tableTools": {
                         "sSwfPath": "<?php echo base_url('assets2/js/Datatables/tools/swf/copy_csv_xls_pdf.swf'); ?>"
                     }

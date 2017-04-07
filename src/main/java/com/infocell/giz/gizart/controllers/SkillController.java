@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -97,7 +98,6 @@ public class SkillController {
 				model.addAttribute("subSkillSet", subSkillList);
 				model.addAttribute("editCommand", skillService.get(sid));
 				model.addAttribute("subSkillCommand", new SubSkill());
-				session.setAttribute("edt", skillService.get(sid));
 				return "editSkill";
 
 			} else {
@@ -112,19 +112,20 @@ public class SkillController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
-	public String update(@ModelAttribute("editCommand") Skill skill, HttpSession session, Model model) {
+	public String update(@ModelAttribute("editCommand") Skill skill, HttpSession session, Model model,
+			RedirectAttributes rd) {
 
 		Login l = (Login) session.getAttribute("admin");
 		try {
 			if (l != null && l.getRole().getRoleName().equalsIgnoreCase("admin")) {
 
-				Skill s = (Skill) session.getAttribute("edt");
-				s.setName(skill.getName());
 				model.addAttribute("skillSet", skillService.getList());
+				System.out.println("skill id is " + skill.getSkillId());
 
-				skillService.update(s);
+				skillService.update(skill);
 
-				return "redirect:/skill/add";
+				rd.addFlashAttribute("message", "Successfully Updated");
+				return "redirect:/skill/manage";
 
 			} else {
 				return "redirect:/admin/login";
@@ -138,13 +139,90 @@ public class SkillController {
 	}
 
 	@RequestMapping(value = "/addsubskill/{skillId}")
-	public String addSubSkill(@PathVariable("skillId") int skillId, HttpSession session) {
+	public String addSubSkill(@PathVariable("skillId") int skillId, HttpSession session, Model model) {
 
 		Login l = (Login) session.getAttribute("admin");
 		try {
 			if (l != null && l.getRole().getRoleName().equalsIgnoreCase("admin")) {
 
-				return "redirect:/subSkill/add/" + skillId;
+				model.addAttribute("addSubSkillCommand", new SubSkill());
+
+				model.addAttribute("subSkillList", subSkillService.getListFromSkill(skillId));
+				model.addAttribute("skillId", skillId);
+
+				return "createSubSkill";
+
+			} else {
+				return "redirect:/admin/login";
+
+			}
+		} catch (NullPointerException e) {
+			return "redirect:/admin/login";
+
+		}
+
+	}
+
+	@RequestMapping(value = "/addsubskill", method = RequestMethod.POST)
+	public String postSubSkill(@RequestParam("skillId") int skillId, HttpSession session, Model model,
+			@ModelAttribute("addSubSkillCommand") SubSkill subSkill, RedirectAttributes rd) {
+
+		Login l = (Login) session.getAttribute("admin");
+		try {
+			if (l != null && l.getRole().getRoleName().equalsIgnoreCase("admin")) {
+
+				Skill s = skillService.get(skillId);
+				subSkill.setSkill(s);
+
+				subSkillService.create(subSkill);
+
+				rd.addFlashAttribute("message", "Successfully added a subskill to " + s.getName());
+				return "redirect:/skill/manage";
+
+			} else {
+				return "redirect:/admin/login";
+
+			}
+		} catch (NullPointerException e) {
+			return "redirect:/admin/login";
+
+		}
+
+	}
+
+	@RequestMapping(value = "/edit-subskill/{skillId}")
+	public String editSubSkill(@PathVariable("skillId") int skillId, HttpSession session, Model model) {
+
+		Login l = (Login) session.getAttribute("admin");
+		try {
+			if (l != null && l.getRole().getRoleName().equalsIgnoreCase("admin")) {
+
+				model.addAttribute("subSkill", subSkillService.get(skillId));
+
+				return "editSubSkill";
+
+			} else {
+				return "redirect:/admin/login";
+
+			}
+		} catch (NullPointerException e) {
+			return "redirect:/admin/login";
+
+		}
+
+	}
+
+	@RequestMapping(value = "/edit-subskill", method = RequestMethod.POST)
+	public String editSubSkill(@ModelAttribute("editSubSkillCommand") SubSkill subSkill, HttpSession session,
+			RedirectAttributes rd) {
+
+		Login l = (Login) session.getAttribute("admin");
+		try {
+			if (l != null && l.getRole().getRoleName().equalsIgnoreCase("admin")) {
+
+				subSkillService.update(subSkill);
+				rd.addFlashAttribute("message", "Successfully Edited");
+				return "redirect:/skill/manage";
 
 			} else {
 				return "redirect:/admin/login";
@@ -158,12 +236,13 @@ public class SkillController {
 	}
 
 	@RequestMapping(value = "/remove/{skillId}")
-	public String delete(@PathVariable("skillId") int skillId, HttpSession session) {
+	public String delete(@PathVariable("skillId") int skillId, HttpSession session, RedirectAttributes rd) {
 		Login l = (Login) session.getAttribute("admin");
 		try {
 			if (l != null && l.getRole().getRoleName().equalsIgnoreCase("admin")) {
 
 				skillService.delete(skillId);
+				rd.addFlashAttribute("message", "Successfully Deleted");
 				return "redirect:/skill/manage";
 
 			} else {

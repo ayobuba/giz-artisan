@@ -17,7 +17,7 @@ public interface SubSkillDao {
 
 	void update(SubSkill s);
 
-	void delete(String id);
+	void delete(int id);
 
 	List<SubSkill> getListFromSkill(Skill id);
 

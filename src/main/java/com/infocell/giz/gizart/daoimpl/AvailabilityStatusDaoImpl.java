@@ -31,7 +31,7 @@ public class AvailabilityStatusDaoImpl extends AbstractDao<Integer, Availability
 	@Override
 	public AvailabilityStatus getWithSid(String sid) {
 		Criteria criteria = createEntityCriteria();
-		criteria.add(Restrictions.eq("sid", sid));
+		criteria.add(Restrictions.eq("availability", sid));
 		return (AvailabilityStatus) criteria.uniqueResult();
 	}
 

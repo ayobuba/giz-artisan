@@ -24,6 +24,7 @@ import com.infocell.giz.gizart.model.Login;
 import com.infocell.giz.gizart.model.NewsAlbum;
 import com.infocell.giz.gizart.model.PictureAlbum;
 import com.infocell.giz.gizart.service.AlbumService;
+import com.infocell.giz.gizart.service.ExpertService;
 import com.infocell.giz.gizart.service.GalleryNewsService;
 import com.infocell.giz.gizart.service.GalleryPictureService;
 import com.infocell.giz.gizart.service.GalleryService;
@@ -54,6 +55,9 @@ public class GalleryController {
 
 	@Autowired
 	private GalleryPictureService galleryPictureService;
+
+	@Autowired
+	private ExpertService expertService;
 
 	@RequestMapping(value = "/add-news-image/{albumId}", method = RequestMethod.GET)
 	public String addImage(Model model, @PathVariable("albumId") int albumId, HttpSession session,
@@ -90,7 +94,7 @@ public class GalleryController {
 				model.addAttribute("album", pictureAlbumService.get(album));
 				model.addAttribute("pictureList", galleryPictureService.getListByAlbum(pictureAlbumService.get(album)));
 
-				return "GalleryPicture";
+				return "upload-album";
 			} else {
 
 				return "redirect:/admin/login";
@@ -104,11 +108,11 @@ public class GalleryController {
 	}
 
 	@RequestMapping(value = "/add-gallery-image/{albumId}", method = RequestMethod.POST)
-	public String addGalleryImage(@RequestParam("file") MultipartFile file, @RequestParam("desc") String desc,
-			@PathVariable("albumId") int albumId, @ModelAttribute("album") PictureAlbum n) {
+	public String addGalleryImage(@RequestParam("file") MultipartFile file, @PathVariable("albumId") int albumId,
+			@ModelAttribute("album") PictureAlbum n) {
 		PictureAlbum a = pictureAlbumService.get(albumId);
 		GalleryPicture g = new GalleryPicture();
-		System.out.println("File Description:" + desc);
+
 		String fileName = null;
 		String webappRoot = servletContext.getRealPath("/");
 		String relativeFolder = File.separator + "resources" + File.separator + "gallery" + File.separator;
@@ -176,6 +180,75 @@ public class GalleryController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
 	public String updateImage(@ModelAttribute GalleryPicture gallery) {
 		return null;
+
+	}
+
+	@RequestMapping(value = "/news")
+	public String getNewsGallery(Model model, HttpSession session) {
+
+		Login l = (Login) session.getAttribute("admin");
+
+		try {
+			if (l != null && l.getRole().getRoleName().equalsIgnoreCase("admin")) {
+
+				model.addAttribute("newsGallery", galleryNewsService.getList());
+
+				return "newsGallery";
+			} else {
+
+				return "redirect:/admin/login";
+			}
+		} catch (NullPointerException e) {
+
+			return "redirect:/admin/login";
+
+		}
+
+	}
+
+	@RequestMapping(value = "/gallery")
+	public String getPictureGallery(Model model, HttpSession session) {
+
+		Login l = (Login) session.getAttribute("admin");
+
+		try {
+			if (l != null && l.getRole().getRoleName().equalsIgnoreCase("admin")) {
+
+				model.addAttribute("galleryPicture", galleryPictureService.getList());
+
+				return "pictureGallery";
+			} else {
+
+				return "redirect:/admin/login";
+			}
+		} catch (NullPointerException e) {
+
+			return "redirect:/admin/login";
+
+		}
+
+	}
+
+	@RequestMapping(value = "/experts")
+	public String getExpertGallery(Model model, HttpSession session) {
+
+		Login l = (Login) session.getAttribute("admin");
+
+		try {
+			if (l != null && l.getRole().getRoleName().equalsIgnoreCase("admin")) {
+
+				model.addAttribute("expertPicture", expertService.getList());
+
+				return "expertGallery";
+			} else {
+
+				return "redirect:/admin/login";
+			}
+		} catch (NullPointerException e) {
+
+			return "redirect:/admin/login";
+
+		}
 
 	}
 

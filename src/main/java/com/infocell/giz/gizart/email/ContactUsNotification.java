@@ -11,19 +11,26 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.infocell.giz.gizart.model.Admin;
+import com.infocell.giz.gizart.model.ContactUs;
+import com.infocell.giz.gizart.serviceimpl.ContactUsServiceImpl;
 
 public class ContactUsNotification implements MailService {
 
-	public void sendToAllAdmins(List<Admin> adminList) {
+	@Autowired
+	private ContactUsServiceImpl contactUsServiceImpl;
+
+	public void sendToAllAdmins(List<Admin> adminList, ContactUs c) {
 		for (Admin a : adminList) {
-			sendEmail(a);
+			sendEmail(a, c);
 
 		}
 
 	}
 
-	public void sendEmail(Object object) {
+	public void sendEmail(Object object, ContactUs c) {
 		final String username = "artisanjobcenter@gmail.com";
 		final String password = "Artisan@79";
 
@@ -46,10 +53,10 @@ public class ContactUsNotification implements MailService {
 
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("artisanjobcenter@gmail.com"));
-			message.setRecipients(Message.RecipientType.TO,
-					InternetAddress.parse(admin.getBioData().getEmail().getEmailAddress()));
-			message.setSubject("Artisan Job Centre");
-			message.setText("Hello, " + "\n\n You have a new contact. Please login to your admin panel to view.");
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("info@artisanjobcenter.ng"));
+			message.setSubject("Contact @AJC");
+			message.setText("Hello, " + "\n\n You have a new contact. See message below:\n\n" + c.getMessage()
+					+ "\n\n From:\n\n" + "Name:" + c.getName() + "\n\n" + "Email:" + c.getEmail().getEmailAddress());
 
 			Transport.send(message);
 

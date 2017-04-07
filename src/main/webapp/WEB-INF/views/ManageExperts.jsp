@@ -68,11 +68,12 @@
                                 
                                 <div class="x_content">
                                     <table id="example" class="table table-striped responsive-utilities jambo_table">
+                                     <h4><span style="color:red">${errMsg}</span> <span style="color:Orange">${msg}<span style="color:blue">${remaining}</span> ${msg1}</span></h4>
                                         <thead>
                                             <tr class="headings" colspan="4">
                                             	<th>S/N</th>
-                                                <th>Last Name</th>
-                                                <th>First Name </th>
+                                                <th>Full Name</th>
+                                                <th>Skill</th>
                                                 <th>Gender</th>
                                                 <th>Status</th>
                                                 <th>Experience</th>
@@ -86,23 +87,24 @@
                                         <c:forEach items="${expertList}" var="expert">
                                         
                                             <tr class="even pointer">
-                                            	<%-- <td class=" "><%=++sn %></td> --%>
-                                                <td class=" ">${expert.interview.enrolment.artisan.artisanBioData.lastName }</td>
-                                                <td class=" ">${expert.interview.enrolment.artisan.artisanBioData.firstName }</td>
+                                            	<td class=" "><%=++sn %></td> 
+                                                <td class=" ">${expert.interview.enrolment.artisan.artisanBioData.lastName } 
+                                                			${expert.interview.enrolment.artisan.artisanBioData.firstName }</td>
+                                                <td class=" ">${expert.interview.enrolment.artisan.subSkill.name}</td>
                                                 <td class=" ">${expert.interview.enrolment.artisan.artisanBioData.gender.genderName }</td>
-                                                <td class=" ">${expert.interview.enrolment.maritalStatus.status }</td>
+                                                <td class=" ">${expert.availabilityStatus.availability }</td>
                                                 <td class=" ">${expert.interview.enrolment.yearsOfExperience}</td> 
                                                 
                                                 
                                                  
-                                                <td class=" last"><a href="<spring:url value="/expert/assign-request/${exppert.expertId}"/>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i>Assign to Request</a>
+                                                <td class=" last"><a href="<spring:url value="/service/assign-expert/${expert.expertId}"/>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i>Assign to Request</a>
                                                 </td>
-                                                <td class=" last"><a href="<spring:url value="/expert/view/${exppert.expertId}"/>" class="btn btn-warning btn-xs"><i class="fa fa-eye"></i>view Details</a>
+                                                <td class=" last"><a href="<spring:url value="/experts/view/${expert.expertId}"/>" class="btn btn-warning btn-xs"><i class="fa fa-eye"></i>view Details</a>
                                                 </td>
                                                  
                                             </tr>
                                             </c:forEach>
-                                            <%-- <% sn=0; %> --%>
+                                            <% sn=0; %>
                         
                                             
                                         
@@ -177,7 +179,7 @@
             ],
                     'iDisplayLength': 12,
                     "sPaginationType": "full_numbers",
-                    "dom": 'T<"clear">lfrtip',
+                   
                     "tableTools": {
                         "sSwfPath": "<?php echo base_url('assets2/js/Datatables/tools/swf/copy_csv_xls_pdf.swf'); ?>"
                     }

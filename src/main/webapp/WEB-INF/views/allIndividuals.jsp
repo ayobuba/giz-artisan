@@ -90,7 +90,7 @@
                                                 </td>
                                                 <td class=" ">${client.bioData.address.lga.name}</td>
                                                 
-                                                <td class=" last"><a class="btn btn-primary btn-xs" href="clientProfile.html"><i class="fa fa-folder"></i> View </a>
+                                                <td class=" last"><a class="btn btn-primary btn-xs" href="<spring:url value="/client/individual/view/${client.clientIndividualId }"/>"><i class="fa fa-folder"></i> View </a>
                                                 </td>
                                             </tr>
                                             
@@ -168,7 +168,7 @@
             ],
                     'iDisplayLength': 12,
                     "sPaginationType": "full_numbers",
-                    "dom": 'T<"clear">lfrtip',
+                   
                     "tableTools": {
                         "sSwfPath": "<?php echo base_url('assets2/js/Datatables/tools/swf/copy_csv_xls_pdf.swf'); ?>"
                     }

@@ -173,6 +173,7 @@ public class AdminController {
 		Login l = (Login) session.getAttribute("admin");
 		try {
 			if (l != null && l.getRole().getRoleName().equalsIgnoreCase("admin")) {
+				model.addAttribute("year", LocalDate.now().getYear());
 
 				return "allAdmin";
 

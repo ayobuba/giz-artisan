@@ -49,7 +49,7 @@
         <![endif]-->
 
 
-<%@ include file="header.jsp" %>
+<%@ include file="adminHeader.jsp" %>
 
             <!-- page content -->
             <div class="right_col" role="main">
@@ -58,11 +58,10 @@
                     <div class="page-title">
                         <div class="title_left">
                         <span></span>
-                            <h3>Edit Artisan Skill</h3>
-                            <span style="color: green">${message}</span>
+                            <h3>Update Artisan Skill</h3>
+                            
+                            <span style="color: green"><h2>${message}</h2></span>
                         </div>
-                        
-                        <%! int sn=0; %>
                         
                     </div>
                     <div class="clearfix"></div>
@@ -76,27 +75,26 @@
                                 </div>
                                 <div class="x_content">
                                     <br />
-                                    <spring:url value="/skill/edit/${skill.sid }" var="skillUrlForm"/>
+                                    <spring:url value="/skill/edit" var="skillUrlForm"/>
                                     <form:form id="demo-form2" class="form-horizontal form-label-left" method="POST" action="${skillUrlForm}" modelAttribute="editCommand">
-
-                                            <div class="form-group">
+										<form:hidden path="skillId"/>
+                                        <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="skill-name">Skill Name <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <form:input path="name" type="text" id="skillName" required="required" class="form-control col-md-7 col-xs-12" name="skillName"/>
+                                                <form:input type="text" id="skillName" required="required" class="form-control col-md-7 col-xs-12" path="name"/>
                                             </div>
-                                             <span> <Button href="<spring:url value="/skill/edit/${skill.sid }"/>" type="submit" class="btn btn-success">Update Skill</Button></span>
                                         </div>
-                                       
-                                       
-                                       
+                                                           
                                         
-                       
-                                        <div class="ln_solid">
-                                        
-                                       
-                                     
-                                       
+                                        <div class="ln_solid"></div>
+                                        <div class="form-group">
+                                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                                <button type="submit" class="btn btn-success">Submit</button>
+                                                
+                                                
+                                            </div>
+                                        </div>
 
                                     </form:form>
                                 </div>
@@ -109,7 +107,7 @@
                     <div class="page-title">
                         <div class="title_left">
                             <h3>
-                    Sub Skills 
+                    SubSkills 
                    
                 </h3>
                         </div>
@@ -127,32 +125,32 @@
                                     <table id="example" class="table table-striped responsive-utilities jambo_table">
                                         <thead>
                                             <tr class="headings">
-                                               <th>
-                                                    <input type="checkbox" class="tableflat">
-                                                </th>
+                                               
                                                 <th>S/N </th>
-                                                <th>Sub Skill Name </th>
+                                                <th>Skill Name </th>
                                                 
-                                                <th class=" no-link last" colspan="2" align="center"><span class="nobr">Action</span>
+                                                <th class=" no-link last" colspan="3" align="center"><span class="nobr">Action</span>
                                                 </th>
                                             </tr>
                                         </thead>
-
+										<%int sn=0; %>
                                         <tbody>
-                                            <c:forEach items="${subSkillSet }" var="skill">
+                                            <c:forEach items="${subSkillSet}" var="skill">
                                                 <tr class="even pointer"> 
-                                                    <td class="a-center ">
-                                                    <input type="checkbox" class="tableflat">
-                                                </td>
-                                                <td class=" "><%= sn=sn+1 %></td>
+                                                    
+                                                <td class=" "><%=++sn %></td>
                                                 <td class=" ">${skill.name}</td>
-                                                </td>
+                                                
                                             
-                                                <td><a href="<spring:url value="/subskill/delete/${skill.sid }"/>" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>Delete</a></td>
-                                                <td ><a href="<spring:url value="/subskill/edit/${skill.sid }"/>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+                                                
+                                                <td ><a href="<spring:url value="/skill/edit-subskill/${skill.id}"/>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
                                                 </td>
+                                                <td ><a href="<spring:url value="/skill/addsubskill/${skill.id }"/>" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> Manage subskill </a>
+                                                </td>
+                                                <td><a href="<spring:url value="/skill/remove/${skill.id}"/>" class="btn btn-danger btn-xs">Delete</a></td>
                                             </tr>
                                             </c:forEach>
+                                            <% sn=0; %>
                                             
                                             
                                         
@@ -187,7 +185,7 @@
 
 
 
-<%@ include file="footer.jsp" %>
+<%@ include file="adminFooter.jsp" %>
 
 
 
@@ -444,7 +442,7 @@
             ],
                     'iDisplayLength': 12,
                     "sPaginationType": "full_numbers",
-                    "dom": 'T<"clear">lfrtip',
+                   
                     "tableTools": {
                         "sSwfPath": "<?php echo base_url('assets2/js/Datatables/tools/swf/copy_csv_xls_pdf.swf'); ?>"
                     }

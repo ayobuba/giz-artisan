@@ -6,7 +6,7 @@
 
  <footer>
                     <div class="">
-                        <p class="pull-right">&#9400; {{Current Year}} Infocell Solutions. |
+                        <p class="pull-right">&#9400; ${year} Infocell Solutions. |
                             <span class="lead"> <i class="fa fa-paw"></i> GIZ!</span>
                         </p>
                     </div>

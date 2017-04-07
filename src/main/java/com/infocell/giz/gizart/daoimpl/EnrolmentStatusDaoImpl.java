@@ -17,7 +17,6 @@ public class EnrolmentStatusDaoImpl extends AbstractDao<Integer, EnrolmentStatus
 
 	@Override
 	public void update(EnrolmentStatus s) {
-		update(s);
 
 	}
 

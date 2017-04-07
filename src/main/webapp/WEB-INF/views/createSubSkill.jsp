@@ -74,14 +74,14 @@
                                 </div>
                                 <div class="x_content">
                                     <br />
-                                    <spring:url value="/subSkill/manage/${skillId }" var="skillUrlForm"/>
-                                    <form:form id="demo-form2" class="form-horizontal form-label-left" method="POST" action="${skillUrlForm}" modelAttribute="subSkillCommand">
-
+                                    <spring:url value="/skill/addsubskill" var="skillUrlForm"/>
+                                    <form:form id="demo-form2" class="form-horizontal form-label-left" method="POST" action="${skillUrlForm}" modelAttribute="addSubSkillCommand">
+										<input type="hidden" name="skillId" value="${skillId}"/>
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="skill-name">SubSkill Name <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <form:input type="text" id="skillName" required="required" class="form-control col-md-7 col-xs-12" path="name"/>
+                                                <form:input type="text" id="name" required="required" class="form-control col-md-7 col-xs-12" path="name"/>
                                             </div>
                                         </div>
                                                            
@@ -136,7 +136,7 @@
                                         </thead>
 
                                         <tbody>
-                                            <c:forEach items="${skillSubSkillList }" var="skill">
+                                            <c:forEach items="${subSkillList }" var="skill">
                                             <%! int sn=0; %>
                                                 <tr class="even pointer"> 
                                                     <td class="a-center ">
@@ -146,8 +146,8 @@
                                                 <td class=" ">${skill.name}</td>
                                                 </td>
                                             
-                                                <td><a href="<spring:url value="/subskill/delete/${skill.id}"/>" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>Delete</a></td>
-                                                <td ><a href="<spring:url value="/subskill/edit/${skill.id }"/>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+                                                <td><a href="<spring:url value="/subSkill/delete/${skill.id}"/>" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>Delete</a></td>
+                                                <td ><a href="<spring:url value="/skill/edit-subskill/${skill.id }"/>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
                                                 </td>
 
                                             </tr>
@@ -444,7 +444,7 @@
             ],
                     'iDisplayLength': 12,
                     "sPaginationType": "full_numbers",
-                    "dom": 'T<"clear">lfrtip',
+                   
                     "tableTools": {
                         "sSwfPath": "<?php echo base_url('assets2/js/Datatables/tools/swf/copy_csv_xls_pdf.swf'); ?>"
                     }

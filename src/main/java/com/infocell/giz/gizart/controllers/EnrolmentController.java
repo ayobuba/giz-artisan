@@ -9,6 +9,8 @@ import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
+import org.joda.time.DateTimeZone;
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
@@ -25,6 +27,7 @@ import com.infocell.giz.gizart.email.AdminEnrolmentNotification;
 import com.infocell.giz.gizart.email.NewEnrolmentMail;
 import com.infocell.giz.gizart.model.Enrolment;
 import com.infocell.giz.gizart.model.Expert;
+import com.infocell.giz.gizart.model.ExpertImage;
 import com.infocell.giz.gizart.model.Gender;
 import com.infocell.giz.gizart.model.Interview;
 import com.infocell.giz.gizart.model.Lga;
@@ -33,8 +36,10 @@ import com.infocell.giz.gizart.model.MaritalStatus;
 import com.infocell.giz.gizart.model.State;
 import com.infocell.giz.gizart.model.SubSkill;
 import com.infocell.giz.gizart.service.AdminService;
+import com.infocell.giz.gizart.service.AvailabilityStatusService;
 import com.infocell.giz.gizart.service.EnrolmentService;
 import com.infocell.giz.gizart.service.EnrolmentStatusService;
+import com.infocell.giz.gizart.service.ExpertImageService;
 import com.infocell.giz.gizart.service.ExpertService;
 import com.infocell.giz.gizart.service.GenderService;
 import com.infocell.giz.gizart.service.InterviewService;
@@ -83,6 +88,12 @@ public class EnrolmentController {
 
 	@Autowired
 	private EnrolmentStatusService enrolmentStatusService;
+
+	@Autowired
+	private AvailabilityStatusService availabilityStatusService;
+
+	@Autowired
+	private ExpertImageService expertImageService;
 
 	private NewEnrolmentMail newEnrolmentMail = new NewEnrolmentMail();
 
@@ -185,6 +196,7 @@ public class EnrolmentController {
 				Enrolment e = enrolmentService.get(enrolmentId);
 
 				Interview inter = interviewService.getWithEnrolment(e);
+				e.setEnrolmentStatus(enrolmentStatusService.getWithSid("Invited"));
 				enrolmentService.update(e);
 				Interview i = new Interview();
 
@@ -213,19 +225,62 @@ public class EnrolmentController {
 	}
 
 	@RequestMapping(value = "/promote/{interviewId}")
-	public String promote(@PathVariable("interviewId") int interviewId, HttpSession session, RedirectAttributes rd) {
+	public String promote(@PathVariable("interviewId") int interviewId, HttpSession session, RedirectAttributes rd,
+			Model model) {
 
-		Expert expert = new Expert();
 		Login l = (Login) session.getAttribute("admin");
 
 		try {
 			if (l != null && l.getRole().getRoleName().equalsIgnoreCase("admin")) {
 
-				Interview i = interviewService.get(interviewId);
-				i.getEnrolment().setEnrolmentStatus(enrolmentStatusService.getWithSid("Invited"));
-				interviewService.update(i);
-				expert.setInterview(i);
-				System.out.println("enrolmentStatus is " + i.getEnrolment().getEnrolmentStatus().getStatusName());
+				model.addAttribute("interviewee", interviewService.get(interviewId));
+				return "make-expert";
+			} else {
+
+				return "redirect:/admin/login";
+			}
+		} catch (NullPointerException e) {
+
+			return "redirect:/admin/login";
+
+		}
+
+	}
+
+	@RequestMapping(value = "/promote", method = RequestMethod.POST)
+	public String promote(HttpSession session, RedirectAttributes rd, @RequestParam("image") MultipartFile file,
+			@RequestParam("interviewee") int interviewee) {
+
+		Expert expert = new Expert();
+		ExpertImage ei = new ExpertImage();
+		String fileName = null;
+		String webappRoot = servletContext.getRealPath("/");
+		String relativeFolder = File.separator + "resources" + File.separator + "gallery" + File.separator;
+		Login l = (Login) session.getAttribute("admin");
+
+		try {
+
+			if (l != null && l.getRole().getRoleName().equalsIgnoreCase("admin")) {
+
+				System.out.println("interview id is " + interviewee);
+				fileName = webappRoot + relativeFolder + file.getOriginalFilename();
+				byte[] bytes = file.getBytes();
+				BufferedOutputStream buffStream = new BufferedOutputStream(new FileOutputStream(new File(fileName)));
+				buffStream.write(bytes);
+				expert.setInterview(interviewService.get(interviewee));
+				expert.setAvailabilityStatus(availabilityStatusService.getWithSid("Available"));
+
+				final DateTimeZone fromTimeZone = DateTimeZone.forID("Africa/Lagos");
+
+				LocalDate ld = new LocalDate(LocalDate.now(), fromTimeZone);
+				expert.setDate(ld);
+				expert.setImage(file.getOriginalFilename());
+				ei.setImageName(file.getOriginalFilename());
+				ei.setExpert(expert);
+
+				System.out.println("original file name is " + file.getOriginalFilename());
+
+				buffStream.close();
 
 				expertService.create(expert);
 				rd.addFlashAttribute("msg", "successfully made an expert");
@@ -244,6 +299,12 @@ public class EnrolmentController {
 
 		}
 
+		catch (Exception e) {
+			rd.addFlashAttribute("errMsg", "something went wrong");
+			e.printStackTrace();
+			return "redirect:/enrol/manage/interviewees";
+
+		}
 	}
 
 	@RequestMapping(value = "/expert/{interviewId}")
@@ -264,7 +325,7 @@ public class EnrolmentController {
 				buffStream.close();
 				Interview i = interviewService.get(interviewId);
 				Expert e = new Expert();
-				e.setDate(new Date());
+
 				e.setInterview(i);
 				e.setImage(file.getOriginalFilename());
 				expertService.create(e);
@@ -330,7 +391,7 @@ public class EnrolmentController {
 
 	@ModelAttribute("enrolledList")
 	public List<Enrolment> getEnrolledList() {
-		return enrolmentService.getList();
+		return enrolmentService.getPendingList();
 	}
 
 	@ModelAttribute("interviewList")
